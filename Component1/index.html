@@ -8,11 +8,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.11.1/lodash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/postal.js/1.0.8/postal.min.js"></script>
   <script src="https://rawgit.com/postaljs/postal.diagnostics/master/lib/postal.diagnostics.min.js"></script>
+  <script src="https://rawgit.com/xunilrj/frontend-sandbox/feature/ReactiveViewTest1/Component1/brokercontainer.js"></script>
   <script>
-    var wireTap = new postal.diagnostics.DiagnosticsWireTap();
-    function raise(name,parameter){
-      $(this).trigger(name, parameter);
-    }
+    var wireTap = new postal.diagnostics.DiagnosticsWireTap();    
   </script>
 </head>
 <body>
@@ -20,19 +18,7 @@
     <button onclick="javascript:raise('event1',{name:'daniel'})">click</button>    
   </div>   
   <script>
-    $(".to-broker").each(function(){
-      $(this).attr("data-tobroker")
-        .split(",")
-        .forEach(function(item){
-            $(this).on(item, function(e, data){              
-              postal.publish({
-                channel: "dom",
-                topic: "events." + e.type,
-                data: data
-              });
-          });
-        });
-      });    
+    StartBrokerContainers();
   </script>
 </body>
 </html>
